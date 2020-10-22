@@ -37,4 +37,25 @@ class Manage_model extends CI_Model
 		$result = $this->db->get_where('personal', array('student_id' => $id));
 		return $result->result();
 	}
+
+	function check_login($student_id, $password)
+	{
+		// $this->db->select('email,password');
+		$this->db->where('student_id','password');
+		$result = $this->db->get('personal');
+		$message = '';
+		if ($result->num_rows() > 0) {
+			$message = true;
+
+			// $this->load->view('list');
+
+		} else {
+			$message = false;
+		}
+		$data = array(
+			"message"=>$message,"data"=>$result->result()
+
+		);
+		return $data;
+	}
 }

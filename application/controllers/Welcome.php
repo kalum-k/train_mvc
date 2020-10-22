@@ -8,18 +8,24 @@ class Welcome extends CI_Controller {
     }
 
 	public function index(){
+		
 		$data['datapersonal'] = $this->Manage_model->personal_view();
-        $this->load->view('home',$data);
+		$this->load->view('home',$data);
+		$this->load->view('footer');
+		
 	}
 
 	public function reg_alumni(){
 		$this->load->view('reg_alumni');
+		$this->load->view('footer');
+		
 		
 	}
 
 	public function view_reg(){
 		$data['datapersonal'] = $this->Manage_model->personal_view(); 
-		$this->load->view('view_reg',$data);	
+		$this->load->view('view_reg',$data);
+		$this->load->view('footer');	
 	}
 
 	public function info_list()
@@ -27,5 +33,14 @@ class Welcome extends CI_Controller {
         $id = $this->input->post('id');
 		$data['datapersonal'] = $this->Manage_model->info_list_m($id);
 		$this->load->view('view_reg',$data);
+		$this->load->view('footer');
+	}
+
+	public function login()
+	{
+		
+		$this->load->view('login');
+		$this->load->view('footer');
+		
 	}
 }

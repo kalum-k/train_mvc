@@ -5,7 +5,9 @@ class Manage extends CI_Controller {
 
     function __construct(){
         parent::__construct();
-        $this->load->model('Manage_model');
+            $this->load->view('head');
+            $this->load->model('Manage_model');
+            $this->load->view('footer');
     }
 
     public function index(){
@@ -26,6 +28,7 @@ class Manage extends CI_Controller {
             'tel' => $this->input->post("p_tel"),
             'email' => $this->input->post("email"),
             'facebook' => $this->input->post("facebook"),
+            'password' => $this->input->post("password")
 
             
         );
@@ -58,7 +61,7 @@ class Manage extends CI_Controller {
         $this->Manage_model->alumni_insert($dataalumni);
         $this->Manage_model->workinformation_insert($dataworkinformation);
 
-        $this->load->view('view_reg');     
+        $this->load->view('home');     
 
        
     }
@@ -72,6 +75,8 @@ class Manage extends CI_Controller {
         $id = $this->input->post('id');
 		$result['datapersonal'] = $this->Manage_model->info_list_m($id);
 		$this->load->view('view_list',$result);
-	}
+    }
+    
+    
            
 }

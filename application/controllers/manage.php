@@ -6,11 +6,13 @@ class Manage extends CI_Controller {
     function __construct(){
         parent::__construct();
             $this->load->view('head');
+            $this->load->library('session');
             $this->load->model('Manage_model');
             $this->load->view('footer');
     }
 
     public function index(){
+        
 
     }
 
@@ -77,6 +79,35 @@ class Manage extends CI_Controller {
 		$this->load->view('view_list',$result);
     }
     
+    public function login()
+
+    {
+            $studentid = $this->input->post('login_studentid');
+            $password = $this->input->post('login_password');
+            $check = $this->Manage_model->check_login($studentid, $password);
+
+            if ($check['message'] == true) {
+                $array = json_decode(json_encode($check['data']), true);
+                $this->session->set_userdata($array[0]);
+                $data['query'] = $this->Manage_model->personal_view();
+                redirect('manage/view_reg',$data);
+                // $this->load->view('list', $data);
+                // print_r($this->session);
+            } else {
+                redirect('Welcome/index');
+                
+            }
+        
+    }
+    public function logout()
+    {
+        $this->session->sess_destroy();
+        // $this->session->unset_userdata($data);
+        // $this->load->view('login');
+        redirect('Welcome/index');
+      
+    }
+   
     
            
 }

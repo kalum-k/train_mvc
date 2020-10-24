@@ -15,19 +15,25 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <link href="https://fonts.googleapis.com/css?family=Muli:300,400,500,600,700,800,900&display=swap" rel="stylesheet">
 
     <!-- Css Styles -->
-    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
-    <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
-    <link rel="stylesheet" href="css/themify-icons.css" type="text/css">
-    <link rel="stylesheet" href="css/elegant-icons.css" type="text/css">
-    <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
-    <link rel="stylesheet" href="css/nice-select.css" type="text/css">
-    <link rel="stylesheet" href="css/jquery-ui.min.css" type="text/css">
-    <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
-    <link rel="stylesheet" href="css/style.css" type="text/css">
+    <link rel="stylesheet" href="<?php echo base_url(); ?>css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="<?php echo base_url(); ?>css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="<?php echo base_url(); ?>css/themify-icons.css" type="text/css">
+    <link rel="stylesheet" href="<?php echo base_url(); ?>css/elegant-icons.css" type="text/css">
+    <link rel="stylesheet" href="<?php echo base_url(); ?>css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="<?php echo base_url(); ?>css/nice-select.css" type="text/css">
+    <link rel="stylesheet" href="<?php echo base_url(); ?>css/jquery-ui.min.css" type="text/css">
+    <link rel="stylesheet" href="<?php echo base_url(); ?>css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="<?php echo base_url(); ?>css/style.css" type="text/css">
 
     <link href="http://localhost/alumni/source/dataTables/dataTables.bootstrap4.min.css" rel="stylesheet">
 </head>
-<?php  include("connect.php");  ?>
+<style>
+    .edit {
+        background-color: #e7ab3c;
+        color: #fff;
+    }
+</style>
+
 
 <body>
     <!-- Page Preloder -->
@@ -49,7 +55,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         <div style="text-align: center;" > 
                             <h2>ระบบสมาชิกศิษย์เก่า</h2>
                             <h3>Nakhon Pathom Rajabhat University</h3>
-                            <img src="img/npru.png" >
+                            <img src="<?php echo base_url(); ?>img/npru.png" >
                             <?php if(isset($_SESSION["name"])){
                                 echo '<h5>ผู้ใช้งาน : '.$_SESSION["name"].'</h5>';
                             };
@@ -66,15 +72,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <div class="container">
                 <nav class="nav-menu mobile-menu">
                     <ul>
-                        <li class="index"><a href="index.php">หน้าแรก</a></li>
-                        
-                        <?php if(!isset($_SESSION["name"])){ ?>
-                        <li><a href="#"  data-toggle="modal" data-target="#login">เข้าสู่ระบบ</a></li>
-                        <li class="register"><a href="register.php">ลงทะเบียน</a></li>
-                        <?php   }; ?>
-                      
+                        <li class="index"><a href="<?php echo base_url(); ?>index.php/welcome/index">หน้าแรก</a></li>
+
                         <?php if(isset($_SESSION["name"])){ ?>
-                        <li class="edit"><a href="edit.php">ประวัติส่วนตัว</a></li>
+                        <li class="edit"><a href="<?php echo base_url(); ?>index.php/welcome/edit">ประวัติส่วนตัว</a></li>
                         <li><a href="#"  data-toggle="modal" data-target="#logout">ออกจากระบบ</a></li>
                         <?php   }; ?>
 
@@ -87,3 +88,4 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         </div>
     </header>
     <!-- Header End -->
+    

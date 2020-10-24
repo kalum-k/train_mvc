@@ -43,4 +43,16 @@ class Welcome extends CI_Controller {
 		$this->load->view('footer');
 		
 	}
+
+	public function homehome()
+	{
+		$data['datapersonal'] = $this->Manage_model->personal_view();
+		$this->load->view('home2',$data);
+		$this->load->view('footer');
+	}
+	public function edit(){
+		$this->load->view('head');
+		$this->load->view('edit');
+		$this->load->view('footer');
+	}
 }

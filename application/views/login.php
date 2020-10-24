@@ -14,7 +14,7 @@
                         <div class="modal-body">
                             <div class="form-group">
                                 <label>รหัสนักศึกษา</label>
-                                <input type="email" class="form-control" id="login_studentid" name="login_studentid">
+                                <input type="text" class="form-control" id="login_studentid" name="login_studentid">
                             </div>
                             <div class="form-group">
                                 <label>Password</label>
@@ -22,7 +22,7 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="submit" class="btn" name="login" style="background-color:#e7ab3c;color:#fff;">เข้าสู่ระบบ</button>
+                            <button type="submit" class="btn" style="background-color:#e7ab3c;color:#fff;">เข้าสู่ระบบ</button>
                             <button type="reset" class="btn btn-secondary">ยกเลิก</button>
                         </div>
                     </form>

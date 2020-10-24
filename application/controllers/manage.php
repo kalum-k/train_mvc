@@ -5,10 +5,10 @@ class Manage extends CI_Controller {
 
     function __construct(){
         parent::__construct();
-            $this->load->view('head');
-            $this->load->library('session');
+            
+            //$this->load->library('session');
             $this->load->model('Manage_model');
-            $this->load->view('footer');
+            
     }
 
     public function index(){
@@ -84,29 +84,36 @@ class Manage extends CI_Controller {
     {
             $studentid = $this->input->post('login_studentid');
             $password = $this->input->post('login_password');
-            $check = $this->Manage_model->check_login($studentid, $password);
+             //echo $studentid ;
+             //echo $password;
 
-            if ($check['message'] == true) {
-                $array = json_decode(json_encode($check['data']), true);
-                $this->session->set_userdata($array[0]);
-                $data['query'] = $this->Manage_model->personal_view();
-                redirect('manage/view_reg',$data);
-                // $this->load->view('list', $data);
-                // print_r($this->session);
+            $this->db->select('*');
+            $this->db->from('personal');
+            $this->db->where(array('student_id' => $studentid, 'password' => $password));
+            $query = $this->db->get();
+    
+            $user = $query->row();
+    
+            if ($user->student_id ) {
+                $this->session->set_flashdata("success", "เข้าสู่ระบบสำเร็จ");
+    
+                $_SESSION['student_id'] = $user->student_id;
+                $_SESSION['name'] = $user->name;
+                $_SESSION['password'] = $user->password;
+    
+                redirect("welcome/homelogin", "refresh");
             } else {
-                redirect('Welcome/index');
-                
+                $this->session->set_flashdata("error", "ไม่มีชื่อศิษย์เก่านี้ โปรดลงทะเบียน");
+                echo '<script> alert("รหัสนักศึกษาหรือรหัสผ่านไม่ถูกต้อง กรุณาตรวจสอบอีกครั้ง") </script>';
+                redirect("welcome/login", "refresh");
             }
-        
-    }
-    public function logout()
-    {
-        $this->session->sess_destroy();
-        // $this->session->unset_userdata($data);
-        // $this->load->view('login');
-        redirect('Welcome/index');
-      
-    }
+        }
+    
+        public function logout()
+        {
+            $this->session->sess_destroy();
+            redirect('welcome/index', 'refresh');
+        }
    
     
            

@@ -44,13 +44,13 @@ class Welcome extends CI_Controller {
 		
 	}
 
-	public function homehome()
+	public function homelogin()
 	{
 		$data['datapersonal'] = $this->Manage_model->personal_view();
-		$this->load->view('home2',$data);
+		$this->load->view('homelogin',$data);
 		$this->load->view('footer');
 	}
-	public function edit(){
+	public function viewedit(){
 		$this->load->view('head');
 		$this->load->view('edit');
 		$this->load->view('footer');

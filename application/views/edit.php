@@ -101,7 +101,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                 $resultWorkinformation = $showWorkinformation->fetchAll();
                 ?>
                 <br>
-                <h3><span class="badge" style="background-color:#e7ab3c;color:#fff;">ข้อมูลส่วนตัว</span></h3>
+                <h3><span class="badge" style="background-color:#e7ab3c;color:#fff;">แก้ไขข้อมูลส่วนตัว</span></h3>
                 <hr>
 
                 <?php foreach ($resultPersonal as $rowPersonal) { ?>

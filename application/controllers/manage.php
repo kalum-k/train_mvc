@@ -17,9 +17,17 @@ class Manage extends CI_Controller {
     }
 
     public function reg_alumni(){
+        //$config['upload_path']   = './img/upload/'; //Folder สำหรับ เก็บ ไฟล์ที่  Upload
+		//$config['allowed_types'] = 'gif|jpg|png'; //รูปแบบไฟล์ที่ อนุญาตให้ Upload ได้
+		//$config['max_size']      = 100; //ขนาดไฟล์สูงสุดที่ Upload ได้ (กรณีไม่จำกัดขนาด กำหนดเป็น 0)
+		//$config['max_width']     = 1024; //ขนาดความกว้างสูงสุด (กรณีไม่จำกัดขนาด กำหนดเป็น 0)
+		//$config['max_height']    = 768;  //ขนาดความสูงสูงสดุ (กรณีไม่จำกัดขนาด กำหนดเป็น 0)
+		/*$config['encrypt_name']  = true; //กำหนดเป็น true ให้ระบบ เปลียนชื่อ ไฟล์  อัตโนมัติ  ป้องกันกรณีชื่อไฟล์ซ้ำกัน
+		$this->load->library('upload', $config);
+		$this->upload->do_upload('upload');*/
 
-        $name = $this->input->post("prefix").$this->input->post("fname").$this->input->post("lname");
-        $address = $this->input->post("p_number").$this->input->post("p_road").$this->input->post("p_district").$this->input->post("p_amphoe").$this->input->post("p_province").$this->input->post("p_zipcode");
+        $name = $this->input->post("prefix")." ".$this->input->post("fname")." ".$this->input->post("lname");
+        $address = $this->input->post("p_number")." ".$this->input->post("p_road")." ".$this->input->post("p_district")." ".$this->input->post("p_amphoe")." ".$this->input->post("p_province")." ".$this->input->post("p_zipcode");
         $datapersonal = array(
             'card_id' => $this->input->post("card_id"),
             'student_id' => $this->input->post("student_id"),
@@ -46,7 +54,7 @@ class Manage extends CI_Controller {
             'year_out' => $this->input->post("year_out"),
             'outstanding_work' => $this->input->post("outstanding_work")
         );
-        $address2 = $this->input->post("c_number").$this->input->post("c_road").$this->input->post("c_district").$this->input->post("c_amphoe").$this->input->post("c_zipcode");
+        $address2 = $this->input->post("c_number")." ".$this->input->post("c_road")." ".$this->input->post("c_district")." ".$this->input->post("c_amphoe")." ".$this->input->post("c_zipcode");
         $dataworkinformation = array(
             'student_id' => $this->input->post("student_id"),
             'company' => $this->input->post("company"),
@@ -113,6 +121,58 @@ class Manage extends CI_Controller {
         {
             $this->session->sess_destroy();
             redirect('welcome/index', 'refresh');
+        }
+
+        public function edit()
+        {
+        $name = $this->input->post("prefix")." ".$this->input->post("fname")." ".$this->input->post("lname");
+        $address = $this->input->post("p_number")." ".$this->input->post("p_road")." ".$this->input->post("p_district")." ".$this->input->post("p_amphoe")." ".$this->input->post("p_province")." ".$this->input->post("p_zipcode");
+        $datapersonal = array(
+            'card_id' => $this->input->post("card_id"),
+            'student_id' => $this->input->post("student_id"),
+            'name'=> $name,
+            'gender' => $this->input->post("gender"),
+            'birthday' => $this->input->post("birthday"),
+            'address' => $address, 
+            'tel' => $this->input->post("p_tel"),
+            'email' => $this->input->post("email"),
+            'facebook' => $this->input->post("facebook"),
+            'password' => $this->input->post("password")
+
+            
+        );
+
+        $dataalumni = array(
+            'student_id' => $this->input->post("student_id"),
+            'group' => $this->input->post("group"),
+            'branch' => $this->input->post("branch"),
+            'faculty' => $this->input->post("faculty"),
+            'semester' => $this->input->post("semester"),
+            'education_level' => $this->input->post("education_level"),
+            'year_int' => $this->input->post("year_int"),
+            'year_out' => $this->input->post("year_out"),
+            'outstanding_work' => $this->input->post("outstanding_work")
+        );
+        $address2 = $this->input->post("c_number")." ".$this->input->post("c_road")." ".$this->input->post("c_district")." ".$this->input->post("c_amphoe")." ".$this->input->post("c_zipcode");
+        $dataworkinformation = array(
+            'student_id' => $this->input->post("student_id"),
+            'company' => $this->input->post("company"),
+            'position' => $this->input->post("position"),
+            'address'=> $address2,
+            'province' => $this->input->post("c_province"),
+            'tel' => $this->input->post("c_tel")
+
+        );
+
+         
+        $this->Manage_model->edit($datapersonal,$dataalumni,$dataworkinformation);
+        
+        /*$id= $this->input->post("student_id");
+		$this->session->set_userdata($datapersonal,$dataalumni,$dataworkinformation);
+		$this->Alumni->alumni_update_info($datapersonal,$id);
+		$this->Alumni->alumni_update_home($dataalumni,$id);
+		$this->Alumni->alumni_update_work($dataworkinformation,$id);*/
+		redirect('Welcome/homelogin');
         }
    
     

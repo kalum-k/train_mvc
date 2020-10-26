@@ -59,7 +59,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
             <nav class="nav-menu mobile-menu">
                 <ul>
                     <li class="index"><a href="<?php echo base_url(); ?>index.php/welcome/index">หน้าแรก</a></li>
-                    <li class="edit"><a href="<?php echo base_url(); ?>index.php/welcome/viewedit">ประวัติส่วนตัว</a></li>
+                    <li class="edit"><a href="<?php echo base_url(); ?>index.php/welcome/edit">ประวัติส่วนตัว</a></li>
                     <li><a href="<?php echo base_url(); ?>index.php/manage/logout" >ออกจากระบบ</a></li>
                 </ul>
             </nav>

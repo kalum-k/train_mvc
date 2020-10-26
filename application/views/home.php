@@ -100,18 +100,33 @@ defined('BASEPATH') or exit('No direct script access allowed');
     <br>
 </div>
 <!--  -->
+<!--==========================
+    Carousel-slide
+  ============================-->
+  <div class="container"> 
+  <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
 
-<!-- -->
-<section class="hero-section">
-    <div class="hero-items owl-carousel">
-        <div class="single-hero-items set-bg" data-setbg="img/upload/banner1920x600-01.jpg">
-        </div>
-        <div class="single-hero-items set-bg" data-setbg="img/upload/banner1920x600-02.jpg">
-        </div>
-        <div class="single-hero-items set-bg" data-setbg="img/upload/banner1920x600-03.jpg">
-        </div>
-    </div>
-</section>
+<div class="carousel-inner">
+  <div class="carousel-item active">
+    <img class="d-block w-100" src="img/upload/banner1920x600-01.jpg" alt="First slide">
+  </div>
+  <div class="carousel-item">
+    <img class="d-block w-100" src="img/upload/banner1920x600-02.jpg" alt="Second slide">
+  </div>
+  <div class="carousel-item">
+    <img class="d-block w-100" src="img/upload/banner1920x600-03.jpg" alt="Third slide">
+  </div>
+</div>
+<a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+  <span class="sr-only">Previous</span>
+</a>
+<a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+  <span class="sr-only">Next</span>
+</a>
+</div>
+</div>
 <!-- -->
 
 <!--  -->
@@ -155,7 +170,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                             <td>
                                 <form action="<?php echo base_url('index.php/manage/info_list'); ?>" method="post">
                                     <input type="hidden" name="id" value="<?php echo $row['student_id']; ?>">
-                                    <button class="btn btn-info" name="submit">ดูรายละเอียด</button>
+                                    <button class="btn btn-warning" name="submit">ดูรายละเอียด</button>
                                 </form>
                             </td>
 

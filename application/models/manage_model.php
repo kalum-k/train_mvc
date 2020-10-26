@@ -34,7 +34,11 @@ class Manage_model extends CI_Model
 	function info_list_m($id)
 	{
 		$this->db->select('*');
-		$result = $this->db->get_where('personal', array('student_id' => $id));
+		$this->db->from('personal');
+		$this->db->join('alumni', 'alumni.student_id = personal.student_id');
+		$this->db->join('workinformation', 'workinformation.student_id = personal.student_id');
+		$result = $this->db->where(array('personal.student_id' => $id, 'alumni.student_id' => $id, 'workinformation.student_id' => $id) );
+		$result = $this->db->get('');
 		return $result->result();
 	}
 }

@@ -164,14 +164,14 @@ class Manage extends CI_Controller {
 
         );
 
-         
-        $this->Manage_model->edit($datapersonal,$dataalumni,$dataworkinformation);
         
-        /*$id= $this->input->post("student_id");
+        //$this->Manage_model->edit($datapersonal,$dataalumni,$dataworkinformation);
+        //$this->load->view('edit');
+        $id= $this->input->post("student_id");
 		$this->session->set_userdata($datapersonal,$dataalumni,$dataworkinformation);
-		$this->Alumni->alumni_update_info($datapersonal,$id);
-		$this->Alumni->alumni_update_home($dataalumni,$id);
-		$this->Alumni->alumni_update_work($dataworkinformation,$id);*/
+		$this->Manage_model->alumni_update_info($datapersonal,$id);
+		$this->Manage_model->alumni_update_home($dataalumni,$id);
+		$this->Manage_model->alumni_update_work($dataworkinformation,$id);
 		redirect('Welcome/homelogin');
         }
    

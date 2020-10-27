@@ -81,226 +81,165 @@ defined('BASEPATH') or exit('No direct script access allowed');
             <div class="contact-widget">
                 <div class="cw-item">
                     <div class="ci-text">
-                        <h3>แก้ไขประัติส่วนตัว</h3>
+                        <h3>แก้ไขประวัติส่วนตัว</h3>
                     </div>
                 </div>
             </div>
             <form action="<?php echo base_url(); ?>index.php/manage/edit" method="post" enctype="multipart/form-data" id="form1">
-                <?php
-                $id =  $_SESSION["student_id"];
-                $showPersonal = $conn->prepare("SELECT * FROM `personal` WHERE `student_id` = '$id' ");
-	            $showPersonal->execute();
-                $resultPersonal = $showPersonal->fetchAll();
-
-                $showAlumni = $conn->prepare("SELECT * FROM `alumni` WHERE `student_id` = '$id' ");
-	            $showAlumni->execute();
-                $resultAlumni = $showAlumni->fetchAll();
-
-                $showWorkinformation = $conn->prepare("SELECT * FROM `workinformation` WHERE `student_id` = '$id' ");
-	            $showWorkinformation->execute();
-                $resultWorkinformation = $showWorkinformation->fetchAll();
-                ?>
                 <br>
                 <h3><span class="badge" style="background-color:#e7ab3c;color:#fff;">แก้ไขข้อมูลส่วนตัว</span></h3>
                 <hr>
 
-                <?php foreach ($resultPersonal as $rowPersonal) { ?>
+            
                 <div class="form-row">
                     <div class="form-group col-md-3">
-                    <?php 
-                    $imgPersonal = $rowPersonal['img'];
-                    if($imgPersonal != "noImage"){
-                        echo '<img style="width:125px;border:1px solid #e7ab3c; border-radius: 4px;" id="image" src="img/upload/'.$imgPersonal.'">';
-                    }
-                    else{ echo '<img style="width:125px;border:1px solid #e7ab3c; border-radius: 4px;" id="image"
-                        src="img/user.png">';}
-                    ?>
+
                     </div>
                     <div class="form-group col-md-9">
                         <input type="file" id="inputImage" class="form-control" onchange="readURL(this);"
                             accept="image/*" name="img"   >
                         <br>
                         <label>เลขบัตรประชาชน <span style="color:red;">*</span></label>
-                        <input type="text" class="form-control" value="<?php echo $rowPersonal['card_id']; ?>" readonly >
-                        <input type="text" value="<?php echo $rowPersonal['card_id']; ?>" name="p_card" hidden>
+                        <input type="text" class="form-control" value="<?php echo $this->session->userdata('card_id'); ?>" readonly >
+                        <input type="text" value="<?php echo $this->session->userdata('card_id'); ?>" name="p_card" hidden>
                     </div>
                     <div class="form-group col-md-12">
                         <label>ชื่อ - นามสกุล</label>
-                        <input type="text" class="form-control" value="<?php echo $rowPersonal['name']; ?>" name="fname">
+                        <input type="text" class="form-control" value="<?php echo $this->session->userdata('name'); ?>" name="fname">
                     </div>
                     <div class="form-group col-md-6">
                         <label>เพศ</label>
-                        <select class="form-control" name="gender">
-                            <option value='-'>-</option>
-                            <?php if($rowPersonal['gender'] == "ชาย"){
-                                echo "<option value='ชาย' selected>ชาย</option>";
-                            }
-                            else { 
-                                echo "<option value='ชาย' >ชาย</option>";
-                            } ?>
-                            <?php if($rowPersonal['gender'] == "หญิง"){
-                                echo "<option value='หญิง' selected>หญิง</option>";
-                            }
-                            else { 
-                                echo "<option value='หญิง' >หญิง</option>";
-                            } ?>
-                        </select>
+                    <select id="title" class="form-control" name="title">
+                        <option selected><?php echo $this->session->userdata('gender'); ?></option>
+                        <option>ชาย</option>
+                        <option>หญิง</option>
+                    </select>
                     </div>
                     <div class="form-group col-md-6">
                         <label>วันเดือนปีเกิด </label>
-                        <input type="date" class="form-control" value="<?php echo $rowPersonal['birthday']; ?>" name="birthday">
+                        <input type="date" class="form-control" value="<?php echo $this->session->userdata('birthday'); ?>" name="birthday">
                     </div>
                     <div class="form-group col-md-12">
                         <label>ที่อยู่</label>
-                        <textarea class="form-control" rows="3" name="p_address"><?php echo $rowPersonal['address']; ?></textarea>
+                        <textarea class="form-control" rows="3" name="p_address"><?php echo $this->session->userdata('address'); ?></textarea>
                     </div>
                     <div class="form-group col-md-6">
                         <label for="">เบอร์โทรศัพท์</label>
-                        <input type="text" class="form-control" value="<?php echo $rowPersonal['tel']; ?>" name="p_tel">
+                        <input type="text" class="form-control" value="<?php echo $this->session->userdata('tel'); ?>" name="p_tel">
                     </div>
                     <div class="form-group col-md-6">
                         <label for="">Facebook</label>
-                        <input type="text" class="form-control" value="<?php echo $rowPersonal['facebook']; ?>" name="facebook">
+                        <input type="text" class="form-control" value="<?php echo $this->session->userdata('facebook'); ?>" name="facebook">
                     </div>
                     <div class="form-group col-md-6">
                         <label for="">Email</label>
-                        <input type="text" class="form-control" value="<?php echo $rowPersonal['email']; ?>" name="email">
+                        <input type="text" class="form-control" value="<?php echo $this->session->userdata('email'); ?>" name="email">
                     </div>
                 </div>
-                <?php }; ?>
+                
                 <!--  -->
                 <br>
                 <h3><span class="badge" style="background-color:#e7ab3c;color:#fff;">ข้อมูลการศึกษา</span></h3>
                 <hr>
-                <?php   foreach ($resultAlumni as $rowAlumni) {    ?>
+                
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label>รหัสนักศึกษา <span style="color:red;">*</span></label>
-                        <input type="text" class="form-control" value="<?php echo $rowAlumni['student_id']; ?>" readonly>
-                        <input type="text" value="<?php echo $rowAlumni['student_id']; ?>" name="studentCode" id="studentCode" hidden >
+                        <input type="text" class="form-control" value="<?php echo $this->session->userdata('student_id'); ?>" readonly>
+                        <input type="text" value="<?php echo $this->session->userdata('student_id'); ?>" name="studentCode" id="studentCode" hidden >
                     </div>
                     <div class="form-group col-md-6">
                         <label>หมู่เรียน</label>
-                        <input type="text" class="form-control"  value="<?php echo $rowAlumni['group']; ?>" name="group">
+                        <input type="text" class="form-control"  value="<?php echo $this->session->userdata('group'); ?>" name="group">
                     </div>
                     <div class="form-group col-md-6">
                         <label>สาขา</label>
-                        <input type="text" class="form-control"  value="<?php echo $rowAlumni['branch']; ?>" name="branch">
+                        <input type="text" class="form-control"  value="<?php echo $this->session->userdata('branch'); ?>" name="branch">
                     </div>
                     <div class="form-group col-md-6">
                         <label>คณะ</label>
-                        <input type="text" class="form-control"  value="<?php echo $rowAlumni['faculty']; ?>" name="faculty">
+                        <input type="text" class="form-control"  value="<?php echo $this->session->userdata('faculty'); ?>" name="faculty">
                     </div>
                     <div class="form-group col-md-6">
                         <label>ภาคการศึกษา</label>
-                        <select class="form-control" name="semester">
-                            <option selected>-</option>
-                            <?php if($rowAlumni['semester'] == "ภาคเรียนปกติ"){
-                                echo "<option value='ภาคเรียนปกติ' selected>ภาคเรียนปกติ</option>";
-                            }
-                            else { 
-                                echo "<option value='ภาคเรียนปกติ' >ภาคเรียนปกติ</option>";
-                            } ?>
-                            <?php if($rowAlumni['semester'] == "ภาคเรียนพิเศษ"){
-                                echo "<option value='ภาคเรียนพิเศษ' selected>ภาคเรียนพิเศษ</option>";
-                            }
-                            else { 
-                                echo "<option value='ภาคเรียนพิเศษ' >ภาคเรียนพิเศษ</option>";
-                            } ?>
-                        </select>
+            <select id="attend" class="form-control" name="semester" >
+              <option selected><?php echo $this->session->userdata('semester'); ?></option>
+              <option value="ภาคเรียนปกติ">ภาคเรียนปกติ</option>
+              <option value="ภาคเรียนพิเศษ">ภาคเรียนพิเศษ</option>
+
+            </select>
                     </div>
                     <div class="form-group col-md-6">
                         <label>ระดับการศึกษา</label>
-                        <select id="" class="form-control"  name="education_level">
-                            <option selected>-</option>
-                            <?php if($rowAlumni['education_level'] == "ปริญญาตรี"){
-                                echo "<option value='ปริญญาตรี' selected>ปริญญาตรี</option>";
-                            }
-                            else { 
-                                echo "<option value='ปริญญาตรี' >ปริญญาตรี</option>";
-                            } 
-                            if($rowAlumni['education_level'] == "ปริญญาโท"){
-                                echo "<option value='ปริญญาโท' selected>ปริญญาโท</option>";
-                            }
-                            else { 
-                                echo "<option value='ปริญญาโท' >ปริญญาโท</option>";
-                            }
-                            if($rowAlumni['education_level'] == "ปริญญาเอก"){
-                                echo "<option value='ปริญญาเอก' selected>ปริญญาเอก</option>";
-                            }
-                            else { 
-                                echo "<option value='ปริญญาเอก' >ปริญญาเอก</option>";
-                            } ?>
-                        </select>
+            <select id="attend" class="form-control" name="education_level" >
+              <option selected><?php echo $this->session->userdata('education_level'); ?></option>
+              <option value="ปริญญาตรี">ปริญญาตรี</option>
+              <option value="ปริญญาโท">ปริญญาโท</option>
+              <option value="ปริญญาเอก">ปริญญาเอก</option>
+
+
+            </select>
                     </div>
                     <div class="form-group col-md-3">
                         <label>ปีการศึกษาที่เข้า</label>
-                        <select id="" class="form-control" name="year_int">
-                            <option selected>-</option>
-                            <?php  
-                            // ลดไป 50 ปี + - เองได้  $year_50 = $year-**50**;
-                            $year = date("Y")+543;
-                            $year_50 = $year-50;
-                            for($year;$year_50<=$year;$year--){
+            <select id="attend" class="form-control" name="year_int" >
+              <option selected><?php echo $this->session->userdata('year_int'); ?></option>
+              <option value="2553">2553</option>
+              <option value="2554">2554</option>
+              <option value="2555">2555</option>
+              <option value="2556">2556</option>
+              <option value="2557">2567</option>
+              <option value="2558">2558</option>
+              <option value="2559">2559</option>
 
-                                if($rowAlumni['year_int'] == $year){
-                                    echo "<option value='$year' selected>$year</option>";
-                                }
-                                else{ echo "<option value='$year'>$year</option>"; }
-                            }
-                            ?>
-                        </select>
+            </select>
                     </div>
                     <div class="form-group col-md-3">
                         <label>ปีการศึกษาที่จบ</label>
-                        <select id="" class="form-control" name="year_out">
-                            <option selected>-</option>
-                            <?php  
-                            // ลดไป 50 ปี + - เองได้  $year_50 = $year-**50**;
-                            $year = date("Y")+543;
-                            $year_50 = $year-50;
-                            for($year;$year_50<=$year;$year--){
+            <select id="attend" class="form-control" name="year_out" >
+              <option selected><?php echo $this->session->userdata('year_out'); ?></option>
+              <option value="2553">2553</option>
+              <option value="2554">2554</option>
+              <option value="2555">2555</option>
+              <option value="2556">2556</option>
+              <option value="2557">2567</option>
+              <option value="2558">2558</option>
+              <option value="2559">2559</option>
 
-                                if($rowAlumni['year_out'] == $year){
-                                    echo "<option value='$year' selected>$year</option>";
-                                }
-                                else{ echo "<option value='$year'>$year</option>"; }
-                            }
-                            ?>
-                        </select>
+            </select>
                     </div>
                     <div class="form-group col-md-6">
                         <label>ผลงานที่โดดเด่น</label>
-                        <textarea class="form-control" rows="3" name="outstanding_work"><?php echo $rowAlumni['faculty']; ?></textarea>
+                        <textarea class="form-control" rows="3" name="outstanding_work"><?php echo $this->session->userdata('faculty'); ?></textarea>
                     </div>
                 </div>
-                <?php }; ?>
+                
                 <!--  -->
                 <br>
                 <h3><span class="badge" style="background-color:#e7ab3c;color:#fff;">ข้อมูลการทำงาน</span></h3>
                 <hr>
-                <?php   foreach ($resultWorkinformation as $rowWorkinformation) {   ?>
+                
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label>ตำแหน่งงาน</label>
-                        <input type="text" class="form-control" value="<?php echo $rowWorkinformation['position']; ?>"  name="position">
+                        <input type="text" class="form-control" value="<?php echo $this->session->userdata('position'); ?>"  name="position">
                     </div>
                     <div class="form-group col-md-6">
                         <label>ชื่อบริษัท</label>
-                        <input type="text" class="form-control" value="<?php echo $rowWorkinformation['company']; ?>" name="company">
+                        <input type="text" class="form-control" value="<?php echo $this->session->userdata('company'); ?>" name="company">
                     </div>
                     <div class="form-group col-md-6">
                         <label>เบอร์โทรศัพท์บริษัท</label>
-                        <input type="text" class="form-control" value="<?php echo $rowWorkinformation['tel']; ?>"  name="c_tel">
+                        <input type="text" class="form-control" value="<?php echo $this->session->userdata('tel'); ?>"  name="c_tel">
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-12">
                         <label>ที่อยู่</label>
-                        <textarea class="form-control" rows="3" name="c_address"><?php echo $rowWorkinformation['address']; ?></textarea>
+                        <textarea class="form-control" rows="3" name="c_address"><?php echo $this->session->userdata('address'); ?></textarea>
                     </div>
                 </div>
-                <?php }; ?>
+                
                 <!--  -->
                 <br>
 

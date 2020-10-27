@@ -51,7 +51,8 @@ class Welcome extends CI_Controller {
 		$this->load->view('footer');
 	}
 	public function edit(){
-		$this->load->view('head');
+		$id = $this->session->userdata('student_id');
+		$data['datapersonal'] = $this->Manage_model->info_list_m($id);
 		$this->load->view('edit');
 		$this->load->view('footer');
 	}

@@ -13,11 +13,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             </div>
             <div class="modal-body">
                 <div class="form-group">
-                    <label>เลขบัตรประชาชน</label>
+                    <label>รหัสนักศึกษา</label>
                     <input type="email" class="form-control" id="login_email" name="login_email">
                 </div>
                 <div class="form-group">
-                    <label>รหัสนักศึกษา</label>
+                    <label>Password</label>
                     <input type="password" class="form-control" id="login_password" name="login_password">
                 </div>
             </div>
@@ -117,7 +117,7 @@ function login() {
     form_data.append('login_email', login_email);
     form_data.append('login_password', login_password);
     var getData = $.ajax({
-        url: 'js_login.php',
+        url: '<?php echo base_url(); ?>index.php/manage/login',
         dataType: 'text',
         cache: false,
         contentType: false,
@@ -128,10 +128,10 @@ function login() {
         success: function(getData) {
             console.log(getData);
             if(getData == "error"){
-                alert("กรุณาตรวจสอบ อีเมล หรือ เลขบัตรประชาชน");
+                alert("กรุณาตรวจสอบ รหัสนักศึกษา หรือ รหัสผ่าน");
                 // window.location.reload()
             }
-           else{ window.location.replace('index.php');  }
+           else{ window.location.replace('home2.php');  }
         }
     }).responseText;
 }

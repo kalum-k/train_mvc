@@ -41,4 +41,11 @@ class Manage_model extends CI_Model
 		$result = $this->db->get('');
 		return $result->result();
 	}
+
+	function login()
+	{
+		$this->db->select('student_id, password');
+		$result = $this->db->get('user');
+		return $result;
+	}
 }

@@ -7,11 +7,13 @@ class Manage extends CI_Controller
     function __construct()
     {
         parent::__construct();
-        $this->load->model('Manage_model');
+            
+            //$this->load->library('session');
+            $this->load->model('Manage_model');
+         
     }
-
-    public function index()
-    {
+    public function index(){
+        
     }
 
     public function reg_alumni()
@@ -30,6 +32,7 @@ class Manage extends CI_Controller
             'tel' => $this->input->post("p_tel"),
             'email' => $this->input->post("email"),
             'facebook' => $this->input->post("facebook"),
+            'password' => $this->input->post("password")
 
 
         );
@@ -62,7 +65,9 @@ class Manage extends CI_Controller
         $this->Manage_model->alumni_insert($dataalumni);
         $this->Manage_model->workinformation_insert($dataworkinformation);
 
-        $this->load->view('view_reg');
+
+        $this->load->view('home');     
+
     }
     public function view_reg()
     {
@@ -74,7 +79,47 @@ class Manage extends CI_Controller
     public function info_list()
     {
         $id = $this->input->post('id');
-        $result['datapersonal'] = $this->Manage_model->info_list_m($id);
-        $this->load->view('view_reg', $result);
+		$result['datapersonal'] = $this->Manage_model->info_list_m($id);
+		$this->load->view('view_list',$result);
     }
+    
+    public function login()
+
+    {
+            $studentid = $this->input->post('login_studentid');
+            $password = $this->input->post('login_password');
+             //echo $studentid ;
+             //echo $password;
+
+            $this->db->select('*');
+            $this->db->from('personal');
+            $this->db->where(array('student_id' => $studentid, 'password' => $password));
+            $query = $this->db->get();
+    
+            $user = $query->row();
+    
+            if ($user->student_id ) {
+                $this->session->set_flashdata("success", "เข้าสู่ระบบสำเร็จ");
+    
+                $_SESSION['student_id'] = $user->student_id;
+                $_SESSION['name'] = $user->name;
+                $_SESSION['password'] = $user->password;
+    
+                redirect("welcome/homelogin", "refresh");
+            } else {
+                $this->session->set_flashdata("error", "ไม่มีชื่อศิษย์เก่านี้ โปรดลงทะเบียน");
+                echo '<script> alert("รหัสนักศึกษาหรือรหัสผ่านไม่ถูกต้อง กรุณาตรวจสอบอีกครั้ง") </script>';
+                redirect("welcome/login", "refresh");
+            }
+        }
+    
+        public function logout()
+        {
+            $this->session->sess_destroy();
+            redirect('welcome/index', 'refresh');
+        }
+   
+    
+           
 }
+

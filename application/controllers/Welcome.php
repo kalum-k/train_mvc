@@ -50,7 +50,7 @@ class Welcome extends CI_Controller {
 		$this->load->view('homelogin',$data);
 		$this->load->view('footer');
 	}
-	public function viewedit(){
+	public function edit(){
 		$this->load->view('head');
 		$this->load->view('edit');
 		$this->load->view('footer');

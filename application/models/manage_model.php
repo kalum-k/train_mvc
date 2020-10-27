@@ -48,4 +48,15 @@ class Manage_model extends CI_Model
 		$result = $this->db->get('user');
 		return $result;
 	}
+
+	function editAlumni($datapersonal,$dataalumni,$dataworkinformation)
+	{
+		$id =  $_SESSION["student_id"];
+		$this->db->where('student_id', $id);
+		$this->db->update('personal', $datapersonal);
+		$this->db->update('alumni', $dataalumni);
+		$this->db->update('workinformation', $dataworkinformation);
+	}
+
+	
 }

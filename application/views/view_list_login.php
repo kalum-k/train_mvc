@@ -41,6 +41,10 @@ defined('BASEPATH') or exit('No direct script access allowed');
                         <h2>ระบบสมาชิกศิษย์เก่า</h2>
                         <h3>Nakhon Pathom Rajabhat University</h3>
                         <img src="<?php echo base_url(); ?>img/npru.png">
+                        <?php if(isset($_SESSION["name"])){
+                                echo '<h5>ผู้ใช้งาน : '.$_SESSION["name"].'</h5>';
+                            };
+                        ?>
                     </div>
                 </div>
                 <div class="col-lg-2 text-right col-md-2">
@@ -53,17 +57,9 @@ defined('BASEPATH') or exit('No direct script access allowed');
         <div class="container">
             <nav class="nav-menu mobile-menu">
                 <ul>
-                    <li class="index"><a href="<?php echo base_url(); ?>index.php">หน้าแรก</a></li>
-
-
-                    <li><a href="<?php echo base_url(); ?>">เข้าสู่ระบบ</a></li>
-                    <li class=""><a href="<?php echo base_url(); ?>index.php/welcome/reg_alumni">ลงทะเบียน</a></li>
-
-
-                    <li class="edit"><a href="edit.php">ประวัติส่วนตัว</a></li>
-                    <li><a href="#" data-toggle="modal" data-target="#logout">ออกจากระบบ</a></li>
-
-
+                    <li class="index"><a href="<?php echo base_url(); ?>index.php/welcome/index">หน้าแรก</a></li>
+                    <li class="edit"><a href="<?php echo base_url(); ?>index.php/welcome/edit">แก้ไขประวัติส่วนตัว</a></li>
+                    <li><a href="<?php echo base_url(); ?>index.php/manage/logout" >ออกจากระบบ</a></li>
                 </ul>
             </nav>
             <div id="mobile-menu-wrap"></div>

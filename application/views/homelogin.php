@@ -59,7 +59,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
             <nav class="nav-menu mobile-menu">
                 <ul>
                     <li class="index"><a href="<?php echo base_url(); ?>index.php/welcome/index">หน้าแรก</a></li>
-                    <li class="edit"><a href="<?php echo base_url(); ?>index.php/welcome/edit">ประวัติส่วนตัว</a></li>
+                    <li class="edit"><a href="<?php echo base_url(); ?>index.php/welcome/edit">แก้ไขประวัติส่วนตัว</a></li>
                     <li><a href="<?php echo base_url(); ?>index.php/manage/logout" >ออกจากระบบ</a></li>
                 </ul>
             </nav>
@@ -97,17 +97,33 @@ defined('BASEPATH') or exit('No direct script access allowed');
 </div>
 <!--  -->
 
-<!-- -->
-<section class="hero-section">
-    <div class="hero-items owl-carousel">
-        <div class="single-hero-items set-bg" data-setbg="img/upload/banner1920x600-01.jpg">
-        </div>
-        <div class="single-hero-items set-bg" data-setbg="img/upload/banner1920x600-02.jpg">
-        </div>
-        <div class="single-hero-items set-bg" data-setbg="img/upload/banner1920x600-03.jpg">
-        </div>
-    </div>
-</section>
+<!--==========================
+    Carousel-slide
+  ============================-->
+  <div class="container"> 
+  <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+
+<div class="carousel-inner">
+  <div class="carousel-item active">
+    <img class="d-block w-100" src="<?php echo base_url(); ?>img/upload/banner1920x600-01.jpg" alt="First slide">
+  </div>
+  <div class="carousel-item">
+    <img class="d-block w-100" src="<?php echo base_url(); ?>img/upload/banner1920x600-02.jpg" alt="Second slide">
+  </div>
+  <div class="carousel-item">
+    <img class="d-block w-100" src="<?php echo base_url(); ?>img/upload/banner1920x600-03.jpg" alt="Third slide">
+  </div>
+</div>
+<a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+  <span class="sr-only">Previous</span>
+</a>
+<a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+  <span class="sr-only">Next</span>
+</a>
+</div>
+</div>
 <!-- -->
 
 <!--  -->
@@ -138,7 +154,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                         <th>แสดง</th>
                     </tr>
                 </thead>
-                <tbody>
+                 <tbody>
                     <?php foreach ($datapersonal->result_array() as $row) { ?>
                         <tr>
                             <td><?php echo $row['student_id']; ?></td>
@@ -146,12 +162,12 @@ defined('BASEPATH') or exit('No direct script access allowed');
                             <td><?php echo $row['group']; ?></td>
                             <td><?php echo $row['year_int']; ?></td>
                             <td><?php echo $row['province']; ?></td>
-                            
+                            <!-- <td> อยากแสดงอะไรเพิ่มเองเลยนะ</td> -->
 
                             <td>
-                                <form action="<?php echo base_url('index.php/manage/info_list'); ?>" method="post">
+                                <form action="<?php echo base_url('index.php/manage/info_list_login'); ?>" method="post">
                                     <input type="hidden" name="id" value="<?php echo $row['student_id']; ?>">
-                                    <button class="btn btn-info" name="submit">ดูรายละเอียด</button>
+                                    <button class="btn btn-warning" name="submit">ดูรายละเอียด</button>
                                 </form>
                             </td>
 

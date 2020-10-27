@@ -1,21 +1,21 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class Manage extends CI_Controller {
+class Manage extends CI_Controller
+{
 
-    function __construct(){
+    function __construct()
+    {
         parent::__construct();
             
             //$this->load->library('session');
             $this->load->model('Manage_model');
-            
+         
     }
-
     public function index(){
         
 
     }
-
     public function reg_alumni(){
         //$config['upload_path']   = './img/upload/'; //Folder สำหรับ เก็บ ไฟล์ที่  Upload
 		//$config['allowed_types'] = 'gif|jpg|png'; //รูปแบบไฟล์ที่ อนุญาตให้ Upload ได้
@@ -31,16 +31,17 @@ class Manage extends CI_Controller {
         $datapersonal = array(
             'card_id' => $this->input->post("card_id"),
             'student_id' => $this->input->post("student_id"),
-            'name'=> $name,
+            'password' => $this->input->post("password"),
+            'name' => $name,
             'gender' => $this->input->post("gender"),
             'birthday' => $this->input->post("birthday"),
-            'address' => $address, 
+            'address' => $address,
             'tel' => $this->input->post("p_tel"),
             'email' => $this->input->post("email"),
             'facebook' => $this->input->post("facebook"),
             'password' => $this->input->post("password")
 
-            
+
         );
 
         $dataalumni = array(
@@ -54,37 +55,46 @@ class Manage extends CI_Controller {
             'year_out' => $this->input->post("year_out"),
             'outstanding_work' => $this->input->post("outstanding_work")
         );
+
         $address2 = $this->input->post("c_number")." ".$this->input->post("c_road")." ".$this->input->post("c_district")." ".$this->input->post("c_amphoe")." ".$this->input->post("c_zipcode");
         $dataworkinformation = array(
             'student_id' => $this->input->post("student_id"),
             'company' => $this->input->post("company"),
             'position' => $this->input->post("position"),
-            'address'=> $address2,
+            'address' => $address2,
             'province' => $this->input->post("c_province"),
             'tel' => $this->input->post("c_tel")
 
         );
 
-         //print_r($datapersonal);
+        //print_r($datapersonal);
 
         $this->Manage_model->personal_insert($datapersonal);
         $this->Manage_model->alumni_insert($dataalumni);
         $this->Manage_model->workinformation_insert($dataworkinformation);
 
-        $this->load->view('home');     
 
-       
+        redirect('welcome/index', 'refresh');
+
     }
-    public function view_reg(){
-       
+    public function view_reg()
+    {
+
         $data['datapersonal'] = $this->Manage_model->personal_view();
-        $this->load->view('view_reg',$data);  
+        $this->load->view('view_reg', $data);
     }
 
-    public function info_list(){
+    public function info_list()
+    {
         $id = $this->input->post('id');
 		$result['datapersonal'] = $this->Manage_model->info_list_m($id);
-		$this->load->view('view_list',$result);
+		$this->load->view('view_reg',$result);
+    }
+     public function info_list_login()
+    {
+        $id = $this->input->post('id');
+		$result['datapersonal'] = $this->Manage_model->info_list_m($id);
+		$this->load->view('view_list_login',$result);
     }
     
     public function login()
@@ -92,14 +102,11 @@ class Manage extends CI_Controller {
     {
             $studentid = $this->input->post('login_studentid');
             $password = $this->input->post('login_password');
-             //echo $studentid ;
-             //echo $password;
-
             $this->db->select('*');
             $this->db->from('personal');
-            $this->db->where(array('student_id' => $studentid, 'password' => $password));
+            $this->db->where(array('student_id' => $studentid, 'password' => $password));            
             $query = $this->db->get();
-    
+
             $user = $query->row();
     
             if ($user->student_id ) {
@@ -108,6 +115,18 @@ class Manage extends CI_Controller {
                 $_SESSION['student_id'] = $user->student_id;
                 $_SESSION['name'] = $user->name;
                 $_SESSION['password'] = $user->password;
+                $_SESSION['card_id'] = $user->card_id;
+                $_SESSION['gender'] = $user->gender;
+                $_SESSION['birthday'] = $user->birthday;
+                $_SESSION['address'] = $user->address;
+                $_SESSION['tel'] = $user->tel;
+                $_SESSION['facebook'] = $user->facebook;
+                $_SESSION['email'] = $user->email;
+                $_SESSION['group'] = $user->group;
+                $_SESSION['branch'] = $user->branch;
+                $_SESSION['faculty'] = $user->faculty;
+
+
     
                 redirect("welcome/homelogin", "refresh");
             } else {
@@ -168,7 +187,7 @@ class Manage extends CI_Controller {
         //$this->Manage_model->edit($datapersonal,$dataalumni,$dataworkinformation);
         //$this->load->view('edit');
         $id= $this->input->post("student_id");
-		$this->session->set_userdata($datapersonal,$dataalumni,$dataworkinformation);
+		$this->session->userdata($datapersonal,$dataalumni,$dataworkinformation);
 		$this->Manage_model->alumni_update_info($datapersonal,$id);
 		$this->Manage_model->alumni_update_home($dataalumni,$id);
 		$this->Manage_model->alumni_update_work($dataworkinformation,$id);
@@ -178,3 +197,4 @@ class Manage extends CI_Controller {
     
            
 }
+

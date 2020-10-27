@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.3
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 20, 2020 at 10:56 AM
+-- Generation Time: Oct 27, 2020 at 09:34 AM
 -- Server version: 10.4.14-MariaDB
--- PHP Version: 7.4.11
+-- PHP Version: 7.4.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -58,6 +58,7 @@ INSERT INTO `alumni` (`student_id`, `group`, `branch`, `faculty`, `semester`, `e
 CREATE TABLE `personal` (
   `card_id` char(13) NOT NULL,
   `student_id` int(9) DEFAULT NULL,
+  `password` varchar(20) NOT NULL,
   `name` varchar(255) DEFAULT NULL,
   `gender` enum('ชาย','หญิง') DEFAULT NULL,
   `birthday` date DEFAULT NULL,
@@ -72,11 +73,11 @@ CREATE TABLE `personal` (
 -- Dumping data for table `personal`
 --
 
-INSERT INTO `personal` (`card_id`, `student_id`, `name`, `gender`, `birthday`, `address`, `tel`, `email`, `facebook`, `img`) VALUES
-('1234567890123', 614259014, 'นาย ณัฐชัย สุบรรณเกตุ', 'ชาย', '0000-00-00', '85 - ดำเนินสะดวก เมือง ราชบุรี 82000', '095-456321', 'Nuttachai_Subangate@gmail.com', 'Nuttachai S. Subangate', '1024px-Steve_Jobs_Headshot_2010-CROP.jpg'),
-('1579900782724', 614259054, 'นางสาว ศุภาดา ทองไทย', 'หญิง', '2541-05-22', '85 - ตะกุดไร ชนแดน เพชรบูรณ์ 67190', '0638025540', 'suphada22.ae@gmail.com', 'ิBlueWhale', 'alone.jpg'),
-('1730501138456', 614259056, 'นางสาวSirinratpanpradidt', 'หญิง', '2020-10-20', '128-บางงปลาบางเลนนครปฐม73130', NULL, '614259029@webmail.npru.ac.th', 'kalumni', NULL),
-('1730501138678', 614259029, 'นางสาว สิรินทร์รัตน์ ปานประดิษฐ์', 'หญิง', '2542-08-03', '129  - บางปลา บางเลน Nakhon Pathom 73000', '095-836838', '614259029@webmail.npru.ac.th', 'Sirinrat Hna Panpradidt ', 'basic form.PNG');
+INSERT INTO `personal` (`card_id`, `student_id`, `password`, `name`, `gender`, `birthday`, `address`, `tel`, `email`, `facebook`, `img`) VALUES
+('1234567890123', 614259014, '123456', 'นาย ณัฐชัย สุบรรณเกตุ', 'ชาย', '0000-00-00', '85 - ดำเนินสะดวก เมือง ราชบุรี 82000', '095-456321', 'Nuttachai_Subangate@gmail.com', 'Nuttachai S. Subangate', '1024px-Steve_Jobs_Headshot_2010-CROP.jpg'),
+('1579900782724', 614259054, '', 'นางสาว ศุภาดา ทองไทย', 'หญิง', '2541-05-22', '85 - ตะกุดไร ชนแดน เพชรบูรณ์ 67190', '0638025540', 'suphada22.ae@gmail.com', 'ิBlueWhale', 'alone.jpg'),
+('1730501138456', 614259056, '', 'นางสาวSirinratpanpradidt', 'หญิง', '2020-10-20', '128-บางงปลาบางเลนนครปฐม73130', NULL, '614259029@webmail.npru.ac.th', 'kalumni', NULL),
+('1730501138678', 614259029, '', 'นางสาว สิรินทร์รัตน์ ปานประดิษฐ์', 'หญิง', '2542-08-03', '129  - บางปลา บางเลน Nakhon Pathom 73000', '095-836838', '614259029@webmail.npru.ac.th', 'Sirinrat Hna Panpradidt ', 'basic form.PNG');
 
 -- --------------------------------------------------------
 

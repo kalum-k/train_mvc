@@ -117,16 +117,6 @@ class Manage extends CI_Controller
                 $_SESSION['student_id'] = $user->student_id;
                 $_SESSION['name'] = $user->name;
                 $_SESSION['password'] = $user->password;
-                $_SESSION['card_id'] = $user->card_id;
-                $_SESSION['gender'] = $user->gender;
-                $_SESSION['birthday'] = $user->birthday;
-                $_SESSION['address'] = $user->address;
-                $_SESSION['tel'] = $user->tel;
-                $_SESSION['facebook'] = $user->facebook;
-                $_SESSION['email'] = $user->email;
-                $_SESSION['group'] = $user->group;
-                $_SESSION['branch'] = $user->branch;
-                $_SESSION['faculty'] = $user->faculty;
 
 
     
@@ -147,20 +137,18 @@ class Manage extends CI_Controller
         public function edit()
         {
         $name = $this->input->post("prefix")." ".$this->input->post("fname")." ".$this->input->post("lname");
-        $address = $this->input->post("p_number")." ".$this->input->post("p_road")." ".$this->input->post("p_district")." ".$this->input->post("p_amphoe")." ".$this->input->post("p_province")." ".$this->input->post("p_zipcode");
+        //$address = $this->input->post("p_number")." ".$this->input->post("p_road")." ".$this->input->post("p_district")." ".$this->input->post("p_amphoe")." ".$this->input->post("p_province")." ".$this->input->post("p_zipcode");
         $datapersonal = array(
             'card_id' => $this->input->post("card_id"),
             'student_id' => $this->input->post("student_id"),
             'name'=> $name,
             'gender' => $this->input->post("gender"),
             'birthday' => $this->input->post("birthday"),
-            'address' => $address, 
+            'address' => $this->input->post("address"),
+            'province' => $this->input->post("province"),
             'tel' => $this->input->post("p_tel"),
             'email' => $this->input->post("email"),
-            'facebook' => $this->input->post("facebook"),
-            'password' => $this->input->post("password")
-
-            
+            'facebook' => $this->input->post("facebook")   
         );
 
         $dataalumni = array(
@@ -180,19 +168,15 @@ class Manage extends CI_Controller
             'company' => $this->input->post("company"),
             'position' => $this->input->post("position"),
             'address'=> $address2,
-            'province' => $this->input->post("c_province"),
+            //'province' => $this->input->post("c_province"),
             'tel' => $this->input->post("c_tel")
 
         );
 
-        
-        //$this->Manage_model->edit($datapersonal,$dataalumni,$dataworkinformation);
-        //$this->load->view('edit');
         $id= $this->input->post("student_id");
-		$this->session->userdata($datapersonal,$dataalumni,$dataworkinformation);
-		$this->Manage_model->alumni_update_info($datapersonal,$id);
-		$this->Manage_model->alumni_update_home($dataalumni,$id);
-		$this->Manage_model->alumni_update_work($dataworkinformation,$id);
+		$this->Manage_model->update_personal($datapersonal,$id);
+		$this->Manage_model->update_alumni($dataalumni,$id);
+		$this->Manage_model->update_work($dataworkinformation,$id);
 		redirect('Welcome/homelogin');
         }
    

@@ -49,18 +49,42 @@ class Manage_model extends CI_Model
 		return $result;
 	}
 
-function alumni_update_info($datapersonal,$id){
-	$this->db->where('student_id', $id);
-	$this->db->update('personal', $datapersonal);
-  }
-  function alumni_update_home($dataalumni,$id){
-	$this->db->where('student_id', $id);
-	$this->db->update('alumni', $dataalumni);
-  }
-  function alumni_update_work($dataworkinformation,$id){
-	$this->db->where('student_id', $id);
-	$this->db->update('workinformation', $dataworkinformation);
-  }
+	function update_personal($datapersonal,$id){
+		$this->db->where('student_id',$id);
+		$this->db->update('personal', $datapersonal);
+  	}
+  	function update_alumni($dataalumni,$id){
+		$this->db->where('student_id',$id);
+		$this->db->update('alumni', $dataalumni);
+  	}
+  	function update_work($dataworkinformation,$id){
+		$this->db->where('student_id',$id);
+		$this->db->update('workinformation', $dataworkinformation);
+  	}
 
+  	function showone($id)
+	{
+		$result =	$this->db->select('*')
+			->from('personal')
+			->join('alumni','alumni.student_id = personal.student_id')
+			->join('workinformation','workinformation.student_id = personal.student_id')
+			->where('personal.student_id',$id)
+			->get();
+			return $result;
+
+			
+		}
+
+	  	function showone2()
+	{
+		$result =	$this->db->select('*')
+			->from('personal')
+			->join('alumni','alumni.student_id = personal.student_id')
+			->join('workinformation','workinformation.student_id = personal.student_id')
+			->get();
+			return $result;
+
+			
+		}
 	
 }

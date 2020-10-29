@@ -155,18 +155,18 @@ defined('BASEPATH') or exit('No direct script access allowed');
                     </tr>
                 </thead>
                  <tbody>
-                    <?php foreach ($datapersonal->result_array() as $row) { ?>
+                    <?php foreach ($query->result_array() as $rs) { ?>
                         <tr>
-                            <td><?php echo $row['student_id']; ?></td>
-                            <td><?php echo $row['name']; ?></td>
-                            <td><?php echo $row['group']; ?></td>
-                            <td><?php echo $row['year_int']; ?></td>
-                            <td><?php echo $row['province']; ?></td>
+                            <td><?php echo $rs['student_id']; ?></td>
+                            <td><?php echo $rs['name']; ?></td>
+                            <td><?php echo $rs['group']; ?></td>
+                            <td><?php echo $rs['year_int']; ?></td>
+                            <td><?php echo $rs['province']; ?></td>
                             <!-- <td> อยากแสดงอะไรเพิ่มเองเลยนะ</td> -->
 
                             <td>
                                 <form action="<?php echo base_url('index.php/manage/info_list_login'); ?>" method="post">
-                                    <input type="hidden" name="id" value="<?php echo $row['student_id']; ?>">
+                                    <input type="hidden" name="id" value="<?php echo $rs['student_id']; ?>">
                                     <button class="btn btn-warning" name="submit">ดูรายละเอียด</button>
                                 </form>
                             </td>

@@ -9,7 +9,7 @@ class Welcome extends CI_Controller {
 
 	public function index(){
 		
-		$data['datapersonal'] = $this->Manage_model->personal_view();
+		$data['query'] =$this->Manage_model->showone2();
 		$this->load->view('home',$data);
 		$this->load->view('footer');
 		
@@ -23,7 +23,7 @@ class Welcome extends CI_Controller {
 	}
 
 	public function view_reg(){
-		$data['datapersonal'] = $this->Manage_model->personal_view(); 
+		$data['query'] =$this->Manage_model->showone($id);
 		$this->load->view('view_reg',$data);
 		$this->load->view('footer');	
 	}
@@ -31,7 +31,7 @@ class Welcome extends CI_Controller {
 	public function info_list()
 	{
         $id = $this->input->post('id');
-		$data['datapersonal'] = $this->Manage_model->info_list_m($id);
+		$data['query'] =$this->Manage_model->showone($id);
 		$this->load->view('view_reg',$data);
 		$this->load->view('footer');
 	}
@@ -46,13 +46,13 @@ class Welcome extends CI_Controller {
 
 	public function homelogin()
 	{
-		$data['datapersonal'] = $this->Manage_model->personal_view();
+		$data['query'] =$this->Manage_model->showone2();
 		$this->load->view('homelogin',$data);
 		$this->load->view('footer');
 	}
 	public function edit(){
 		$id = $this->session->userdata('student_id');
-		$data['datapersonal'] = $this->Manage_model->info_list_m($id);
+		$data['query'] =$this->Manage_model->showone($id);
 		$this->load->view('edit',$data);
 		$this->load->view('footer');
 	}

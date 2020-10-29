@@ -94,50 +94,51 @@ defined('BASEPATH') or exit('No direct script access allowed');
                 <h3><span class="badge" style="background-color:#e7ab3c;color:#fff;">แก้ไขข้อมูลส่วนตัว</span></h3>
                 <hr>
 
-            
+            <?php foreach ($query->result_array() as $rs) { ?>
                 <div class="form-row">
                     <div class="form-group col-md-3">
 
                     </div>
-                    <div class="form-group col-md-9">
-                        <input type="file" id="inputImage" class="form-control" onchange="readURL(this);"
-                            accept="image/*" name="img"   >
-                        <br>
+                    <div class="form-group col-md-12">
                         <label>เลขบัตรประชาชน <span style="color:red;">*</span></label>
-                        <input type="text" class="form-control" value="<?php echo $this->session->userdata('card_id'); ?>" readonly >
-                        <input type="text" value="<?php echo $this->session->userdata('card_id'); ?>" name="p_card" hidden>
+                        <input type="text" class="form-control" value="<?php echo $rs['card_id']; ?>" readonly >
+                        <input type="text" value="<?php echo $rs['card_id']; ?>" name="card_id" hidden>
                     </div>
                     <div class="form-group col-md-12">
                         <label>ชื่อ - นามสกุล</label>
-                        <input type="text" class="form-control" value="<?php echo $this->session->userdata('name'); ?>" name="fname">
+                        <input type="text" class="form-control" value="<?php echo $rs['name']; ?>" name="fname">
                     </div>
                     <div class="form-group col-md-6">
                         <label>เพศ</label>
-                    <select id="title" class="form-control" name="title">
-                        <option selected><?php echo $this->session->userdata('gender'); ?></option>
+                    <select id="title" class="form-control" name="gender">
+                        <option selected><?php echo $rs['gender']; ?></option>
                         <option>ชาย</option>
                         <option>หญิง</option>
                     </select>
                     </div>
                     <div class="form-group col-md-6">
                         <label>วันเดือนปีเกิด </label>
-                        <input type="date" class="form-control" value="<?php echo $this->session->userdata('birthday'); ?>" name="birthday">
+                        <input type="date" class="form-control" value="<?php echo $rs['birthday']; ?>" name="birthday">
                     </div>
                     <div class="form-group col-md-12">
                         <label>ที่อยู่</label>
-                        <textarea class="form-control" rows="3" name="p_address"><?php echo $this->session->userdata('address'); ?></textarea>
+                        <textarea class="form-control" rows="3" name="address"><?php echo $rs['address']; ?></textarea>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label>จังหวัด</label>
+                        <input type="text" class="form-control" value="<?php echo $rs['province']; ?>" name="province">
                     </div>
                     <div class="form-group col-md-6">
                         <label for="">เบอร์โทรศัพท์</label>
-                        <input type="text" class="form-control" value="<?php echo $this->session->userdata('tel'); ?>" name="p_tel">
+                        <input type="text" class="form-control" value="<?php echo $rs['tel']; ?>" name="p_tel">
                     </div>
                     <div class="form-group col-md-6">
                         <label for="">Facebook</label>
-                        <input type="text" class="form-control" value="<?php echo $this->session->userdata('facebook'); ?>" name="facebook">
+                        <input type="text" class="form-control" value="<?php echo $rs['facebook']; ?>" name="facebook">
                     </div>
                     <div class="form-group col-md-6">
                         <label for="">Email</label>
-                        <input type="text" class="form-control" value="<?php echo $this->session->userdata('email'); ?>" name="email">
+                        <input type="text" class="form-control" value="<?php echo $rs['email']; ?>" name="email">
                     </div>
                 </div>
                 
@@ -149,34 +150,33 @@ defined('BASEPATH') or exit('No direct script access allowed');
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label>รหัสนักศึกษา <span style="color:red;">*</span></label>
-                        <input type="text" class="form-control" value="<?php echo $this->session->userdata('student_id'); ?>" readonly>
-                        <input type="text" value="<?php echo $this->session->userdata('student_id'); ?>" name="studentCode" id="studentCode" hidden >
+                        <input type="text" class="form-control" value="<?php echo $rs['student_id']; ?>" readonly>
+                        <input type="text" value="<?php echo $rs['student_id']; ?>" name="studentCode" id="studentCode" hidden >
                     </div>
                     <div class="form-group col-md-6">
                         <label>หมู่เรียน</label>
-                        <input type="text" class="form-control"  value="<?php echo $this->session->userdata('group'); ?>" name="group">
+                        <input type="text" class="form-control"  value="<?php echo $rs['group']; ?>" name="group">
                     </div>
                     <div class="form-group col-md-6">
                         <label>สาขา</label>
-                        <input type="text" class="form-control"  value="<?php echo $this->session->userdata('branch'); ?>" name="branch">
+                        <input type="text" class="form-control"  value="<?php echo $rs['branch']; ?>" name="branch">
                     </div>
                     <div class="form-group col-md-6">
                         <label>คณะ</label>
-                        <input type="text" class="form-control"  value="<?php echo $this->session->userdata('faculty'); ?>" name="faculty">
+                        <input type="text" class="form-control"  value="<?php echo $rs['faculty']; ?>" name="faculty">
                     </div>
                     <div class="form-group col-md-6">
                         <label>ภาคการศึกษา</label>
-            <select id="attend" class="form-control" name="semester" >
-              <option selected><?php echo $this->session->userdata('semester'); ?></option>
-              <option value="ภาคเรียนปกติ">ภาคเรียนปกติ</option>
-              <option value="ภาคเรียนพิเศษ">ภาคเรียนพิเศษ</option>
-
-            </select>
+                    <select id="attend" class="form-control" name="semester" >
+                        <option selected><?php echo $rs['semester']; ?></option>
+                        <option value="ภาคเรียนปกติ">ภาคเรียนปกติ</option>
+                        <option value="ภาคเรียนพิเศษ">ภาคเรียนพิเศษ</option>
+                    </select>
                     </div>
                     <div class="form-group col-md-6">
                         <label>ระดับการศึกษา</label>
             <select id="attend" class="form-control" name="education_level" >
-              <option selected><?php echo $this->session->userdata('education_level'); ?></option>
+              <option selected><?php echo $rs['education_level']; ?></option>
               <option value="ปริญญาตรี">ปริญญาตรี</option>
               <option value="ปริญญาโท">ปริญญาโท</option>
               <option value="ปริญญาเอก">ปริญญาเอก</option>
@@ -187,7 +187,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                     <div class="form-group col-md-3">
                         <label>ปีการศึกษาที่เข้า</label>
             <select id="attend" class="form-control" name="year_int" >
-              <option selected><?php echo $this->session->userdata('year_int'); ?></option>
+              <option selected><?php echo $rs['year_int']; ?></option>
               <option value="2553">2553</option>
               <option value="2554">2554</option>
               <option value="2555">2555</option>
@@ -201,7 +201,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                     <div class="form-group col-md-3">
                         <label>ปีการศึกษาที่จบ</label>
             <select id="attend" class="form-control" name="year_out" >
-              <option selected><?php echo $this->session->userdata('year_out'); ?></option>
+              <option selected><?php echo $rs['year_out']; ?></option>
               <option value="2553">2553</option>
               <option value="2554">2554</option>
               <option value="2555">2555</option>
@@ -214,7 +214,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                     </div>
                     <div class="form-group col-md-6">
                         <label>ผลงานที่โดดเด่น</label>
-                        <textarea class="form-control" rows="3" name="outstanding_work"><?php echo $this->session->userdata('faculty'); ?></textarea>
+                        <textarea class="form-control" rows="3" name="outstanding_work"><?php echo $rs['outstanding_work']; ?></textarea>
                     </div>
                 </div>
                 
@@ -226,37 +226,34 @@ defined('BASEPATH') or exit('No direct script access allowed');
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label>ตำแหน่งงาน</label>
-                        <input type="text" class="form-control" value="<?php echo $this->session->userdata('position'); ?>"  name="position">
+                        <input type="text" class="form-control" value="<?php echo $rs['position']; ?>"  name="position">
                     </div>
                     <div class="form-group col-md-6">
                         <label>ชื่อบริษัท</label>
-                        <input type="text" class="form-control" value="<?php echo $this->session->userdata('company'); ?>" name="company">
+                        <input type="text" class="form-control" value="<?php echo $rs['company']; ?>" name="company">
                     </div>
                     <div class="form-group col-md-6">
                         <label>เบอร์โทรศัพท์บริษัท</label>
-                        <input type="text" class="form-control" value="<?php echo $this->session->userdata('tel'); ?>"  name="c_tel">
+                        <input type="text" class="form-control" value="<?php echo $rs['tel']; ?>"  name="c_tel">
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-12">
                         <label>ที่อยู่</label>
-                        <textarea class="form-control" rows="3" name="c_address"><?php echo $this->session->userdata('address'); ?></textarea>
+                        <textarea class="form-control" rows="3" name="c_address"><?php echo $rs['address']; ?></textarea>
                     </div>
                 </div>
-                
+                <?php } ?>
                 <!--  -->
                 <br>
 
                 <div>
                     <button type="submit" class="btn" style="background-color:#e7ab3c;color:#fff;">บันทึกข้อมูล</button>
-                    <a href="index.php"><button type="button" class="btn btn-secondary">ยกเลิก</button> </a>
+                    <a href="<?php echo base_url(); ?>index.php/welcome/homelogin"><button type="button" class="btn btn-secondary">ยกเลิก</button> </a>
                 </div>
-
-
-
-
+                </div>
+                
             </form>
-
         </div>
     </div>
     <br>

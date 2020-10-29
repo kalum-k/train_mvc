@@ -49,14 +49,18 @@ class Manage_model extends CI_Model
 		return $result;
 	}
 
-	function editAlumni($datapersonal,$dataalumni,$dataworkinformation)
-	{
-		$id =  $_SESSION["student_id"];
-		$this->db->where('student_id', $id);
-		$this->db->update('personal', $datapersonal);
-		$this->db->update('alumni', $dataalumni);
-		$this->db->update('workinformation', $dataworkinformation);
-	}
+function alumni_update_info($datapersonal,$id){
+	$this->db->where('student_id', $id);
+	$this->db->update('personal', $datapersonal);
+  }
+  function alumni_update_home($dataalumni,$id){
+	$this->db->where('student_id', $id);
+	$this->db->update('alumni', $dataalumni);
+  }
+  function alumni_update_work($dataworkinformation,$id){
+	$this->db->where('student_id', $id);
+	$this->db->update('workinformation', $dataworkinformation);
+  }
 
 	
 }

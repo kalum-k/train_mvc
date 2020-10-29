@@ -40,7 +40,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                     <div style="text-align: center;">
                         <h2>ระบบสมาชิกศิษย์เก่า</h2>
                         <h3>Nakhon Pathom Rajabhat University</h3>
-                        <img src="<?php echo base_url(); ?>img/npru.png">
+                        <img src="<?php echo base_url(); ?>upload/npru.png">
                         <?php if(isset($_SESSION["name"])){
                                 echo '<h5>ผู้ใช้งาน : '.$_SESSION["name"].'</h5>';
                             };
@@ -58,7 +58,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
         <div class="container">
             <nav class="nav-menu mobile-menu">
                 <ul>
-                    <li class="index"><a href="<?php echo base_url(); ?>index.php/welcome/index">หน้าแรก</a></li>
+                    <li class="index"><a href="<?php echo base_url(); ?>index.php/welcome/homelogin">หน้าแรก</a></li>
                     <li class="edit"><a href="<?php echo base_url(); ?>index.php/welcome/edit">แก้ไขประวัติส่วนตัว</a></li>
                     <li><a href="<?php echo base_url(); ?>index.php/manage/logout" >ออกจากระบบ</a></li>
                 </ul>
@@ -105,13 +105,13 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 <div class="carousel-inner">
   <div class="carousel-item active">
-    <img class="d-block w-100" src="<?php echo base_url(); ?>img/upload/banner1920x600-01.jpg" alt="First slide">
+    <img class="d-block w-100" src="<?php echo base_url(); ?>upload/banner1920x600-01.jpg" alt="First slide">
   </div>
   <div class="carousel-item">
-    <img class="d-block w-100" src="<?php echo base_url(); ?>img/upload/banner1920x600-02.jpg" alt="Second slide">
+    <img class="d-block w-100" src="<?php echo base_url(); ?>upload/banner1920x600-02.jpg" alt="Second slide">
   </div>
   <div class="carousel-item">
-    <img class="d-block w-100" src="<?php echo base_url(); ?>img/upload/banner1920x600-03.jpg" alt="Third slide">
+    <img class="d-block w-100" src="<?php echo base_url(); ?>upload/banner1920x600-03.jpg" alt="Third slide">
   </div>
 </div>
 <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">

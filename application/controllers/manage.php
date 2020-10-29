@@ -17,14 +17,14 @@ class Manage extends CI_Controller
 
     }
     public function reg_alumni(){
-        //$config['upload_path']   = './img/upload/'; //Folder สำหรับ เก็บ ไฟล์ที่  Upload
-		//$config['allowed_types'] = 'gif|jpg|png'; //รูปแบบไฟล์ที่ อนุญาตให้ Upload ได้
+        $config['upload_path']   = './upload/'; //Folder สำหรับ เก็บ ไฟล์ที่  Upload
+		$config['allowed_types'] = 'gif|jpg|png'; //รูปแบบไฟล์ที่ อนุญาตให้ Upload ได้
 		//$config['max_size']      = 100; //ขนาดไฟล์สูงสุดที่ Upload ได้ (กรณีไม่จำกัดขนาด กำหนดเป็น 0)
 		//$config['max_width']     = 1024; //ขนาดความกว้างสูงสุด (กรณีไม่จำกัดขนาด กำหนดเป็น 0)
 		//$config['max_height']    = 768;  //ขนาดความสูงสูงสดุ (กรณีไม่จำกัดขนาด กำหนดเป็น 0)
-		/*$config['encrypt_name']  = true; //กำหนดเป็น true ให้ระบบ เปลียนชื่อ ไฟล์  อัตโนมัติ  ป้องกันกรณีชื่อไฟล์ซ้ำกัน
+		$config['encrypt_name']  = true; //กำหนดเป็น true ให้ระบบ เปลียนชื่อ ไฟล์  อัตโนมัติ  ป้องกันกรณีชื่อไฟล์ซ้ำกัน
 		$this->load->library('upload', $config);
-		$this->upload->do_upload('upload');*/
+		$this->upload->do_upload('upload');
 
         $name = $this->input->post("prefix")." ".$this->input->post("fname")." ".$this->input->post("lname");
         $address = $this->input->post("p_number")." ".$this->input->post("p_road")." ".$this->input->post("p_district")." ".$this->input->post("p_amphoe")." ".$this->input->post("p_province")." ".$this->input->post("p_zipcode");
@@ -39,7 +39,8 @@ class Manage extends CI_Controller
             'tel' => $this->input->post("p_tel"),
             'email' => $this->input->post("email"),
             'facebook' => $this->input->post("facebook"),
-            'password' => $this->input->post("password")
+            'password' => $this->input->post("password"),
+            'img' => $this->upload->data("file_name")
 
 
         );
@@ -102,13 +103,12 @@ class Manage extends CI_Controller
     {
             $studentid = $this->input->post('login_studentid');
             $password = $this->input->post('login_password');
-             //echo $studentid ;
-             //echo $password;
+
             $this->db->select('*');
             $this->db->from('personal');
-            $this->db->where(array('student_id' => $studentid, 'password' => $password));
+            $this->db->where(array('student_id' => $studentid, 'password' => $password));            
             $query = $this->db->get();
-    
+
             $user = $query->row();
     
             if ($user->student_id ) {
@@ -117,6 +117,18 @@ class Manage extends CI_Controller
                 $_SESSION['student_id'] = $user->student_id;
                 $_SESSION['name'] = $user->name;
                 $_SESSION['password'] = $user->password;
+                $_SESSION['card_id'] = $user->card_id;
+                $_SESSION['gender'] = $user->gender;
+                $_SESSION['birthday'] = $user->birthday;
+                $_SESSION['address'] = $user->address;
+                $_SESSION['tel'] = $user->tel;
+                $_SESSION['facebook'] = $user->facebook;
+                $_SESSION['email'] = $user->email;
+                $_SESSION['group'] = $user->group;
+                $_SESSION['branch'] = $user->branch;
+                $_SESSION['faculty'] = $user->faculty;
+
+
     
                 redirect("welcome/homelogin", "refresh");
             } else {
@@ -173,14 +185,14 @@ class Manage extends CI_Controller
 
         );
 
-         
-        $this->Manage_model->edit($datapersonal,$dataalumni,$dataworkinformation);
         
-        /*$id= $this->input->post("student_id");
-		$this->session->set_userdata($datapersonal,$dataalumni,$dataworkinformation);
-		$this->Alumni->alumni_update_info($datapersonal,$id);
-		$this->Alumni->alumni_update_home($dataalumni,$id);
-		$this->Alumni->alumni_update_work($dataworkinformation,$id);*/
+        //$this->Manage_model->edit($datapersonal,$dataalumni,$dataworkinformation);
+        //$this->load->view('edit');
+        $id= $this->input->post("student_id");
+		$this->session->userdata($datapersonal,$dataalumni,$dataworkinformation);
+		$this->Manage_model->alumni_update_info($datapersonal,$id);
+		$this->Manage_model->alumni_update_home($dataalumni,$id);
+		$this->Manage_model->alumni_update_work($dataworkinformation,$id);
 		redirect('Welcome/homelogin');
         }
    

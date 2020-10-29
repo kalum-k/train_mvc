@@ -40,7 +40,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                     <div style="text-align: center;">
                         <h2>ระบบสมาชิกศิษย์เก่า</h2>
                         <h3>Nakhon Pathom Rajabhat University</h3>
-                        <img src="<?php echo base_url(); ?>img/npru.png">
+                        <img src="<?php echo base_url(); ?>upload/npru.png">
                         <?php if(isset($_SESSION["name"])){
                                 echo '<h5>ผู้ใช้งาน : '.$_SESSION["name"].'</h5>';
                             };
@@ -57,7 +57,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
         <div class="container">
             <nav class="nav-menu mobile-menu">
                 <ul>
-                    <li class="index"><a href="<?php echo base_url(); ?>index.php/welcome/index">หน้าแรก</a></li>
+                    <li class="index"><a href="<?php echo base_url(); ?>index.php/welcome/homelogin">หน้าแรก</a></li>
                     <li class="edit"><a href="<?php echo base_url(); ?>index.php/welcome/edit">แก้ไขประวัติส่วนตัว</a></li>
                     <li><a href="<?php echo base_url(); ?>index.php/manage/logout" >ออกจากระบบ</a></li>
                 </ul>
@@ -105,12 +105,12 @@ defined('BASEPATH') or exit('No direct script access allowed');
                         <td rowspan="3"  style="width:130px;" >';
             if ($row->img != "noImage") {
                 echo '<img style="width:125px;border:1px solid #e7ab3c; border-radius: 4px;" id="image"
-                                    src="img/upload/';
+                                    src="<?php echo base_url(); ?>/upload/';
                 echo $row->img;
                 echo ' ">';
             } else {
                 echo '<img style="width:125px;border:1px solid #e7ab3c; border-radius: 4px;" id="image"
-                                    src="img/user.png">';
+                                    src="<?php echo base_url(); ?>/upload/user.png">';
             }
             echo ' </td>
                     </tr>

@@ -19,12 +19,12 @@
                 <hr>
                 <div class="form-row">
                     <div class="form-group col-md-3">
-                        <img style="width:125px;border:1px solid #e7ab3c; border-radius: 4px;" id="image"
-                            src="<?php echo base_url();?>img/user.png">
+                        <img style="width:125px;border:1px solid #e7ab3c; border-radius: 4px;" id="image" 
+                            src="<?php echo base_url();?>upload/user.png">
                     </div>
                     <div class="form-group col-md-9">
                         <input type="file" id="inputImage" class="form-control" onchange="readURL(this);"
-                            accept="image/*" name="img">
+                            accept="image/*" name="upload">
                         <br>
                         <label>เลขบัตรประชาชน <span style="color:red;">*</span></label>
                         <input type="text" class="form-control" name="card_id" id="card_id">

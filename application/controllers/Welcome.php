@@ -46,11 +46,13 @@ class Welcome extends CI_Controller {
 
 	public function homelogin()
 	{
+		$id = $this->input->post('id');
 		$data['query'] =$this->Manage_model->showone2();
 		$this->load->view('homelogin',$data);
 		$this->load->view('footer');
 	}
 	public function edit(){
+		$id = $this->input->post('id');
 		$id = $this->session->userdata('student_id');
 		$data['query'] =$this->Manage_model->showone($id);
 		$this->load->view('edit',$data);

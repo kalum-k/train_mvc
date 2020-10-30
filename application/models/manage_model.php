@@ -44,9 +44,34 @@ class Manage_model extends CI_Model
 
 	function login()
 	{
-		$this->db->select('student_id, password');
+		$this->db->select('*');
+        $this->db->from('personal');
+        $this->db->where(array('student_id' => $studentid, 'password' => $password));            
+        $query = $this->db->get();
+
+        $user = $query->row();
+    
+            if ($user->student_id ) {
+                $this->session->set_flashdata("success", "เข้าสู่ระบบสำเร็จ");
+    
+                $_SESSION['student_id'] = $user->student_id;
+                $_SESSION['name'] = $user->name;
+                $_SESSION['password'] = $user->password;
+
+
+    
+                redirect("welcome/homelogin", "refresh");
+            } else {
+                $this->session->set_flashdata("error", "ไม่มีชื่อศิษย์เก่านี้ โปรดลงทะเบียน");
+                echo '<script> alert("รหัสนักศึกษาหรือรหัสผ่านไม่ถูกต้อง กรุณาตรวจสอบอีกครั้ง") </script>';
+                redirect("welcome/login", "refresh");
+			}
+			
+		/*$this->db->select('student_id, password');
 		$result = $this->db->get('user');
-		return $result;
+		return $result;*/
+
+
 	}
 
 	function update_personal($datapersonal,$id){

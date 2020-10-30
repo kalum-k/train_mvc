@@ -101,13 +101,15 @@ class Manage extends CI_Controller
     public function login()
 
     {
+
             $studentid = $this->input->post('login_studentid');
             $password = $this->input->post('login_password');
+            $query = $this->Manage_model->login($studentid,$password);
 
-            $this->db->select('*');
+           /* $this->db->select('*');
             $this->db->from('personal');
             $this->db->where(array('student_id' => $studentid, 'password' => $password));            
-            $query = $this->db->get();
+            $query = $this->db->get();*/
 
             $user = $query->row();
     
@@ -126,6 +128,7 @@ class Manage extends CI_Controller
                 echo '<script> alert("รหัสนักศึกษาหรือรหัสผ่านไม่ถูกต้อง กรุณาตรวจสอบอีกครั้ง") </script>';
                 redirect("welcome/login", "refresh");
             }
+
         }
     
         public function logout()

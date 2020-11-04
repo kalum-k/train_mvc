@@ -55,6 +55,7 @@ class Welcome extends CI_Controller {
 		$id = $this->input->post('id');
 		$id = $this->session->userdata('student_id');
 		$data['query'] =$this->Manage_model->showone($id);
+		//print_r($data);
 		$this->load->view('edit',$data);
 		$this->load->view('footer');
 	}

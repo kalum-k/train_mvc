@@ -88,7 +88,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
         </div>
         <?php
         foreach ($datapersonal as $row) {
-
             echo '<table id="table_details" class="table table-striped table-bordered" style="width:100%">';
 
             echo '<thead>
@@ -100,18 +99,11 @@ defined('BASEPATH') or exit('No direct script access allowed');
                     <tr>
                         <td style="width:130px;">ชื่อ - นามสกุล</td>
                         <td>';
-            echo $row->name;
+            echo $row->name; 
             echo ' </td>
-                        <td rowspan="3"  style="width:130px;" >';
-            if ($row->img != "noImage") {
-                echo '<img style="width:125px;border:1px solid #e7ab3c; border-radius: 4px;" id="image"
-                                    src="<?php echo base_url(); ?>/upload/';
-                echo $row->img;
-                echo ' ">';
-            } else {
-                echo '<img style="width:125px;border:1px solid #e7ab3c; border-radius: 4px;" id="image"
-                                    src="<?php echo base_url(); ?>/upload/user.png">';
-            }
+                        <td rowspan="5"  style="width:200px;" >';
+                echo '<img style="width:175px;height:220px; border:1px solid #e7ab3c; border-radius: 4px; position:absolute;" id="image"
+                                    src="'.base_url().'/upload/'.$row->img.'">';
             echo ' </td>
                     </tr>
                     <tr>
@@ -128,13 +120,13 @@ defined('BASEPATH') or exit('No direct script access allowed');
                     </tr>
                     <tr>
                         <td>ที่อยู่</td>
-                        <td colspan="2">';
+                        <td  >';
             echo $row->address;
             echo ' </td>
                     </tr>
                     <tr>
                         <td>เบอร์โทรศัพท์</td>
-                        <td colspan="2">';
+                        <td >';
             echo $row->tel;
             echo ' </td>
                     </tr>

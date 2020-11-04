@@ -94,11 +94,18 @@ defined('BASEPATH') or exit('No direct script access allowed');
                 <h3><span class="badge" style="background-color:#e7ab3c;color:#fff;">แก้ไขข้อมูลส่วนตัว</span></h3>
                 <hr>
 
-            <?php foreach ($query->result_array() as $rs) { ?>
+            <?php foreach ($query as $rs) { ?>
                 <div class="form-row">
                     <div class="form-group col-md-3">
-
+                            <img style="width:125px;border:1px solid #e7ab3c; border-radius: 4px;" id="image" 
+                            src="<?php echo base_url('upload');?>/<?php echo $rs['img']?>">    
                     </div>
+                    <div class="form-group col-md-9">
+                        <input type="file" id="inputImage" class="form-control" onchange="readURL(this);"
+                            accept="image/*" name="img"   >
+                            <input type="text" value="<?php echo $rs['img']; ?>" name="img2" hidden>
+                    </div>
+                        
                     <div class="form-group col-md-12">
                         <label>เลขบัตรประชาชน <span style="color:red;">*</span></label>
                         <input type="text" class="form-control" value="<?php echo $rs['card_id']; ?>" readonly >
@@ -124,10 +131,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
                         <label>ที่อยู่</label>
                         <textarea class="form-control" rows="3" name="address"><?php echo $rs['address']; ?></textarea>
                     </div>
-                    <div class="form-group col-md-12">
-                        <label>จังหวัด</label>
-                        <input type="text" class="form-control" value="<?php echo $rs['province']; ?>" name="province">
-                    </div>
                     <div class="form-group col-md-6">
                         <label for="">เบอร์โทรศัพท์</label>
                         <input type="text" class="form-control" value="<?php echo $rs['tel']; ?>" name="p_tel">
@@ -140,6 +143,10 @@ defined('BASEPATH') or exit('No direct script access allowed');
                         <label for="">Email</label>
                         <input type="text" class="form-control" value="<?php echo $rs['email']; ?>" name="email">
                     </div>
+                    <div class="form-group col-md-6">
+                        <label for="">Password</label>
+                        <input type="password" class="form-control" value="<?php echo $rs['password']; ?>" name="password">
+                    </div>
                 </div>
                 
                 <!--  -->
@@ -150,8 +157,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label>รหัสนักศึกษา <span style="color:red;">*</span></label>
-                        <input type="text" class="form-control" value="<?php echo $rs['student_id']; ?>" readonly>
-                        <input type="text" value="<?php echo $rs['student_id']; ?>" name="studentCode" id="studentCode" hidden >
+                        <input type="text" class="form-control" value="<?php echo $rs['student_id']; ?>" name="student_id"  readonly>
                     </div>
                     <div class="form-group col-md-6">
                         <label>หมู่เรียน</label>
@@ -236,11 +242,13 @@ defined('BASEPATH') or exit('No direct script access allowed');
                         <label>เบอร์โทรศัพท์บริษัท</label>
                         <input type="text" class="form-control" value="<?php echo $rs['tel']; ?>"  name="c_tel">
                     </div>
-                </div>
-                <div class="form-row">
                     <div class="form-group col-md-12">
                         <label>ที่อยู่</label>
                         <textarea class="form-control" rows="3" name="c_address"><?php echo $rs['address']; ?></textarea>
+                    </div>
+                    <div class="form-group col-md-5">
+                        <label>จังหวัด</label>
+                        <input type="text" class="form-control" value="<?php echo $rs['province']; ?>" name="c_province">
                     </div>
                 </div>
                 <?php } ?>

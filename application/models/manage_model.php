@@ -56,6 +56,7 @@ class Manage_model extends CI_Model
 	function update_personal($datapersonal,$id){
 		$this->db->where('student_id',$id);
 		$this->db->update('personal', $datapersonal);
+		
   	}
   	function update_alumni($dataalumni,$id){
 		$this->db->where('student_id',$id);
@@ -74,7 +75,7 @@ class Manage_model extends CI_Model
 			->join('workinformation','workinformation.student_id = personal.student_id')
 			->where('personal.student_id',$id)
 			->get();
-			return $result;
+			return $result->result_array();
 
 			
 		}
